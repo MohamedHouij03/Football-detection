@@ -1,3 +1,5 @@
+
+
 <div align="center">
 
 # ⚽ PitchVision
@@ -18,13 +20,9 @@ Upload a match photo. Get every player, goalkeeper, referee, and ball detected w
 
 ---
 
-## Demo
-
-> 📹 **Demo video coming soon**
-
+## Demo Video
 <!-- Replace the line below with your screen recording once uploaded -->
-<!-- [![PitchVision Demo](assets/demo-thumbnail.png)](https://youtube.com/watch?v=YOUR_VIDEO_ID) -->
-
+https://youtu.be/g4Mm9K5nEwM
 ---
 
 ## Features
