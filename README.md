@@ -21,8 +21,7 @@ Upload a match photo. Get every player, goalkeeper, referee, and ball detected w
 ---
 
 ## Demo Video
-[[PitchVision Demo]](https://youtube.com/watch?v=g4Mm9K5nEwM)
-
+[![Demo Video](https://img.youtube.com/vi/g4Mm9K5nEwM/maxresdefault.jpg)](https://www.youtube.com/watch?v=g4Mm9K5nEwM) 
 ## Features
 
 | | Feature | Details |
