@@ -21,6 +21,13 @@ frontend/dist/
 Testing_football-1/
 *.zip
 
+# Local video library (played back on the Live page, not committed)
+videos/
+
+# TactiQ: generated analysis cache + local SQLite DB
+cache/
+tactiq.db
+
 # Jupyter
 .ipynb_checkpoints/
 *.ipynb_checkpoints
@@ -32,6 +39,9 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# AI assistant config (local only, never shared)
+.claude/
 
 # Env files
 .env

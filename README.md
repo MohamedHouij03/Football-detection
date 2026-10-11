@@ -2,17 +2,17 @@
 
 # ⚽ PitchVision
 
-**Football object detection from match images, in seconds.**
+**Football detection, player tracking and a tactics quiz, built from real match footage.**
 
 [![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.111+-009688?style=flat-square&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFBE?style=flat-square&logo=github&logoColor=black)](https://github.com/ultralytics/ultralytics)
+[![YOLO26](https://img.shields.io/badge/YOLO26-Ultralytics-00FFBE?style=flat-square&logo=github&logoColor=black)](https://github.com/ultralytics/ultralytics)
 [![License](https://img.shields.io/badge/License-Educational-green?style=flat-square)](#license)
 
-Upload a match photo. Get every player, goalkeeper, referee, and ball detected with confidence scores — exported as an annotated image, CSV, or report.
+Upload a match photo or clip and watch every player, goalkeeper, referee and the ball get found and labelled. Then turn that same clip into a tactics quiz, pause on a big moment and pick the pass yourself.
 
-[Features](#features) · [Getting Started](#getting-started) · [Model](#model) · [Project Structure](#project-structure)
+[Features](#features) · [Getting Started](#getting-started) · [The Story](#the-story) · [Project Structure](#project-structure)
 
 </div>
 
@@ -20,10 +20,19 @@ Upload a match photo. Get every player, goalkeeper, referee, and ball detected w
 
 ## Demo
 
-> 📹 **Demo video coming soon**
+**Image Detection.** Drop in a match photo, get every player and referee boxed with confidence scores.
 
-<!-- Replace the line below with your screen recording once uploaded -->
-<!-- [![PitchVision Demo](assets/demo-thumbnail.png)](https://youtube.com/watch?v=YOUR_VIDEO_ID) -->
+![Image Detection](assets/Screenshots/image-detection.png)
+
+**Before and after.** Original frame next to the annotated detections.
+
+![Detection comparison](assets/Screenshots/detection-comparison.png)
+
+**Video Detection.** A full clip analyzed and played back with every detection in sync.
+
+![Video Detection](assets/Screenshots/video-detection.png)
+
+> 📹 **Demo video coming soon**
 
 ---
 
@@ -31,12 +40,12 @@ Upload a match photo. Get every player, goalkeeper, referee, and ball detected w
 
 | | Feature | Details |
 |---|---|---|
-| 🔍 | **Object Detection** | Players · Goalkeepers · Referees · Ball |
-| 🖼️ | **Before / After** | Side-by-side original vs. annotated image |
-| 📊 | **Detection Breakdown** | Per-class counts and confidence scores |
-| 📥 | **Export** | Annotated PNG · CSV spreadsheet · text report |
-| 📈 | **Accuracy Dashboard** | Training metrics, precision-recall charts |
-| 🌙 | **Dark / Light Theme** | Persisted across sessions |
+| 🔍 | **Object Detection** | Players, goalkeepers, referees, ball, from a single photo |
+| 🎥 | **Video Detection** | Full clip analyzed, then played back with synced overlays |
+| 🎯 | **Tactical Quiz** | Tracked footage pauses on a decision, you pick the pass |
+| 📊 | **Detection Breakdown** | Per class counts, confidence scores, charts |
+| 📥 | **Export** | Annotated PNG, CSV spreadsheet, text report |
+| 📈 | **Accuracy Dashboard** | Real training metrics, precision recall curves |
 
 ---
 
@@ -46,17 +55,19 @@ Upload a match photo. Get every player, goalkeeper, referee, and ball detected w
 
 ![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)
 ![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)
+![Tailwind](https://img.shields.io/badge/Tailwind-3-38B2AC?style=flat-square&logo=tailwindcss&logoColor=white)
 ![Recharts](https://img.shields.io/badge/Recharts-2-22B5BF?style=flat-square)
 
 **Backend**
 
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-499848?style=flat-square)
-![Pillow](https://img.shields.io/badge/Pillow-3776AB?style=flat-square&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-5C3EE8?style=flat-square&logo=opencv&logoColor=white)
 
 **Model**
 
-![YOLOv8n](https://img.shields.io/badge/YOLOv8n-Ultralytics-00FFBE?style=flat-square)
+![YOLO26n](https://img.shields.io/badge/YOLO26n-Ultralytics-00FFBE?style=flat-square)
+![ByteTrack](https://img.shields.io/badge/ByteTrack-tracking-00FFBE?style=flat-square)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat-square&logo=pytorch&logoColor=white)
 
 ---
@@ -102,16 +113,16 @@ cd ..
 Open two terminals:
 
 ```bash
-# Terminal 1 — backend
+# Terminal 1, backend
 python server.py
-# → API at http://localhost:8000
+# API at http://localhost:8000
 ```
 
 ```bash
-# Terminal 2 — frontend
+# Terminal 2, frontend
 cd frontend
 npm run dev
-# → UI at http://localhost:5173
+# UI at http://localhost:5173
 ```
 
 ### Running in Production (single server)
@@ -119,70 +130,22 @@ npm run dev
 ```bash
 cd frontend && npm run build && cd ..
 python server.py
-# → Full app at http://localhost:8000
+# Full app at http://localhost:8000
 ```
 
 ---
 
-## Dataset
+## The Story
 
-The training dataset was sourced from **[Roboflow](https://roboflow.com)** — a platform for computer vision dataset management and augmentation.
+This started as a university project. Just a photo detector, nothing clever. I trained a YOLOv8n model on a small, messy dataset I pulled together on Roboflow, and it worked. Upload a photo, every player boxed in seconds.
 
-| Property | Value |
-|---|---|
-| Platform | Roboflow Universe |
-| Workspace | `mohamed-houij` |
-| Project | `testing_football` |
-| Version | v1 |
-| Format | YOLOv8 |
+But a photo only knows one frame. I wanted PitchVision to watch a whole match, not just a snapshot of one, so I went looking for something heavier.
 
-The dataset contains annotated football broadcast images split into `train`, `valid`, and `test` sets (6,690 files total). Each image is labeled with bounding boxes across 11 classes mixing French and English annotations (`Arbitre`, `Ballon`, `Football`, `Gardien`, `Joueur`, `Player`, `ball`, `big`, `person`, `player`, `refere`).
+SoccerNet Tracking is real broadcast football, tracked frame by frame by actual professionals. Getting it was its own small ordeal. A signed agreement, a password, downloads that stalled for no reason, a GPU quota that ran out mid training and sent me from Kaggle to Colab halfway through. I never trained from zero though. Both models started from a pretrained checkpoint and were fine tuned from there, which is the only reason any of this finished in days instead of weeks.
 
-> Download via the Roboflow SDK:
-> ```python
-> from roboflow import Roboflow
-> rf = Roboflow(api_key="YOUR_API_KEY")
-> project = rf.workspace("mohamed-houij").project("testing_football")
-> dataset = project.version(1).download("yolov8")
-> ```
+That dataset became YOLO26n, the model running now. Same four classes as before, but it finally understands motion, not just a single still.
 
----
-
-## Model
-
-### Architecture
-
-YOLOv8n (nano) trained on the Roboflow football dataset. Raw model class names are used directly — no remapping — so detections reflect exactly what the model learned.
-
-### Training
-
-| Setting | Value |
-|---|---|
-| Base model | `yolov8n.pt` |
-| Epochs | 50 |
-| Batch size | 16 |
-| Input size | 640×640 |
-| Optimizer | Auto (AdamW) |
-| Platform | Kaggle GPU |
-| Best checkpoint | Epoch 44 |
-
-### Inference
-
-| Parameter | Value | Effect |
-|---|---|---|
-| Confidence threshold | `0.10` | Catches partially visible objects |
-| IoU threshold | `0.30` | Reduces duplicate boxes in crowds |
-| Input size | `1280` | Better recall on aerial/broadcast images |
-| Augmentation | `enabled` | Flipped/scaled passes for improved recall |
-
-### Performance
-
-| Metric | Best (Epoch 44) |
-|---|---|
-| mAP@50 | **42.78%** |
-| mAP@50-95 | 29.34% |
-| Precision | 60.86% |
-| Recall | 50.31% |
+Tracking brought its own fight. Players bunched together would bleed into each other's shirt colour and end up on the wrong team. I taught it to skip anyone too crowded to read cleanly. It still gets the odd one wrong, especially a goalkeeper in a strange kit, but it is close enough now to build a quiz on top of. Pause the right moment, and ask who this player should pass to.
 
 ---
 
@@ -190,29 +153,31 @@ YOLOv8n (nano) trained on the Roboflow football dataset. Raw model class names a
 
 ```
 pitchvision/
-├── server.py              # FastAPI backend (inference + accuracy API)
+├── server.py              # FastAPI backend: inference, tracking, quiz API
+├── tactiq/                # Tracking, team classification, quiz session logic
 ├── requirements.txt       # Python dependencies
+├── Notebooks/              # Training notebooks, Roboflow and SoccerNet
 │
-├── frontend/              # React application (Vite)
+├── frontend/               # React application (Vite + Tailwind)
 │   ├── src/
-│   │   ├── pages/         # Home · Analyze · Accuracy · Docs
-│   │   ├── components/    # Navbar
-│   │   ├── App.jsx        # Router + theme
-│   │   └── index.css      # Design system (CSS custom properties)
+│   │   ├── pages/          # Home, Analyze, Live, Quiz, Accuracy, Docs
+│   │   ├── components/     # Sidebar, shared UI primitives
+│   │   └── App.jsx         # Router
 │   ├── package.json
-│   └── dist/              # Production build output (generated)
+│   └── dist/                # Production build output (generated)
 │
 ├── models/
-│   └── football_best.pt   # Trained YOLOv8n weights
+│   └── football_best.pt    # Currently deployed weights
 │
 └── assets/
-    ├── results.csv         # Training log (50 epochs)
-    └── results.png         # Ultralytics training plot
+    ├── Screenshots/         # README images
+    ├── results.csv          # Training log
+    └── results.png          # Training plot
 ```
 
 ---
 
 ## License
 
-Released for educational and research purposes.  
-Model weights are derived from [Ultralytics YOLOv8](https://github.com/ultralytics/ultralytics) under AGPL-3.0.
+Released for educational and research purposes.
+Model weights are derived from [Ultralytics YOLO](https://github.com/ultralytics/ultralytics) under AGPL-3.0.
