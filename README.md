@@ -32,7 +32,9 @@ Upload a match photo or clip and watch every player, goalkeeper, referee and the
 
 ![Video Detection](assets/Screenshots/video-detection.png)
 
-> 📹 **Demo video coming soon**
+📹 **Demo Video** 
+[![Demo Video](https://img.youtube.com/vi/bC5CJkO16Zs/maxresdefault.jpg)](https://www.youtube.com/watch?v=bC5CJkO16Zs)
+
 
 ---
 
